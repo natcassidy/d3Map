@@ -5,9 +5,56 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title></title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+        crossorigin=""/>
+        <link rel="stylesheet" href="style.css">
+        <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+        integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+        crossorigin=""></script>
+        <script src="https://d3js.org/d3.v5.min.js"></script>
+        
     </head>
     <body>
-        
+        <div id="mapId">
+            <svg class="canvas" height="500" width="1000">
+
+            </svg>
+        </div>
     </body>
+
+    <script>
+
+            var mymap = L.map('mapId').setView([51.505, -0.09], 13);
+
+            L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                maxZoom: 18,
+                id: 'mapbox.streets',
+                accessToken: 'your.mapbox.access.token'
+            }).addTo(mymap);
+
+            const latLong = [
+                [100, 100],
+                [25, 70],
+                [200, 200]
+            ]    
+    
+            const draw = d3.select('svg');
+    
+            draw.selectAll('circle')
+                .data(latLong)
+                .enter()
+                .append("circle")
+                .attr("cx", (d) => {
+                    return d[0];
+                })
+                .attr("cy", (d) => {
+                    return d[1];
+                })
+                .attr("r", 14);
+                
+             
+        </script>
+    
 </html>

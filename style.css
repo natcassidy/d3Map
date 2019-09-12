@@ -1,0 +1,11 @@
+circle {
+    fill: red;
+}
+
+circle:hover {
+    fill:orange;
+}
+
+#mapId {
+    height: 500px;
+}
